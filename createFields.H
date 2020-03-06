@@ -164,23 +164,25 @@ volScalarField alphaEff
         IOobject::NO_READ,
         IOobject::AUTO_WRITE
     ),
-    superFluid->alpha()/rho/cp
+	mesh,
+		    	   dimensionedScalar("small", dimensionSet(0,2,-1,0,0,0,0), SMALL)
+    //superFluid->alpha()/rho/cp
 );
 
-//volScalarField nut
-//(
-//    IOobject
-//    (
-//        "nut",
-//        runTime.timeName(),
-//        mesh,
-//        IOobject::MUST_READ,
-//        IOobject::AUTO_WRITE
-//    ),
-//	mesh
-////	dimensionedScalar("nut", dimensionSet(0,2,-1,0,0,0,0), scalar(0))
-////    turbulence->nut()()
-//);
+volScalarField nut
+(
+    IOobject
+    (
+        "nut",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
+	mesh
+//	dimensionedScalar("nut", dimensionSet(0,2,-1,0,0,0,0), scalar(0))
+//    turbulence->nut()()
+);
 
 #include "readGravitationalAcceleration.H"
 #include "readhRef.H"
@@ -337,6 +339,19 @@ volScalarField B
 //    dimensionedScalar("B", dimensionSet(0,2,-1,-1,0,0,0), scalar(0))
 );
 
+volScalarField k
+(
+    IOobject
+    (
+        "k",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+	superFluid->alpha()
+//    dimensionedScalar("B", dimensionSet(0,2,-1,-1,0,0,0), scalar(0))
+);
 surfaceScalarField q
 (
     IOobject

@@ -184,6 +184,11 @@ public:
 			return viscosityModelPtr_->beta();
 		}
 
+		const volScalarField& k() const
+		{
+			return viscosityModelPtr_->k();
+		}
+
 		const volScalarField& cpHe() const
 		{
 			return viscosityModelPtr_->cp();
@@ -202,6 +207,11 @@ public:
 		const volScalarField& rhoHe() const
 		{
 			return viscosityModelPtr_->rho();
+		}
+
+		const volScalarField& AHe() const
+		{
+			return viscosityModelPtr_->AGM();
 		}
 
 		void calcPr()

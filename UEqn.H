@@ -12,6 +12,7 @@
     );
 	volVectorField& M = tM.ref();
 
+	// czy mozna wyciagac rho jak zalezy od T?
     tmp<fvVectorMatrix> tUEqn
     (
         fvm::ddt(U) + fvm::div(phi, U)

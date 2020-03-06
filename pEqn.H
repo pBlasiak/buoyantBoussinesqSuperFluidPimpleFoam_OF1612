@@ -11,13 +11,17 @@
         "phiHbyA",
         fvc::flux(HbyA)
       + rAUf*fvc::ddtCorr(U, phi)
-//      + phig
-//      + phiM
+      + phig
+      + phiM
     );
 
     MRF.makeRelative(phiHbyA);
-	adjustPhi(phiHbyA, U, p);
-	phiHbyA += phig + phiM;
+	
+    // Update the pressure BCs to ensure flux consistency
+    constrainPressure(p, U, phiHbyA, rAUf, MRF);
+
+//	adjustPhi(phiHbyA, U, p);
+//	phiHbyA += phig + phiM;
 
     // Update the pressure BCs to ensure flux consistency
     constrainPressure(p, U, phiHbyA, rAUf, MRF);
@@ -47,6 +51,7 @@
             // Correct the momentum source with the pressure gradient flux
             // calculated from the relaxed pressure
             U = HbyA + rAU*fvc::reconstruct((phiM + phig - pEqn.flux())/rAUf); //5   (+)
+            //U = HbyA + rAU*fvc::reconstruct(( phig - pEqn.flux())/rAUf); //5   (+)
             U.correctBoundaryConditions();
             fvOptions.correct(U);
         }
