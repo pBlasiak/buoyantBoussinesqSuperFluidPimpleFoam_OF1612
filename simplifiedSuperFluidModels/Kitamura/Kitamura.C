@@ -208,7 +208,7 @@ Foam::tmp<Foam::volScalarField> Foam::simplifiedSuperFluids::Kitamura::alpha() c
 		   (
 		       max
 		       (
-		           viscosityModelPtr_->k()/magG_/magG_, 
+		           viscosityModelPtr_->kappa()/magG_/magG_, 
 		    	   dimensionedScalar("small", dimensionSet(3,3,-9,-3,0,0,0), SMALL)
 		       ), 
 		       1./3

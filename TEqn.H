@@ -8,7 +8,7 @@
 	//    superFluid->alpha()
     //);
 	//alphaEff = talphaEff.ref();
-	alphaEff = k/rho/cp;
+	alphaEff = kappa/rho/cp;
 
 	//k = superFluid->k();
 	//const dimensionedScalar aaa("aaa", dimensionSet(3,1,-9,-2,0,0,0), 53760214065249.20);
@@ -28,7 +28,7 @@
 
 	tmp<volScalarField> tGMpGrest
 	(
-		superFluid->GM()/rho/cp + fvc::div(k*superFluid->Grest(), "div(Grest)")/rho/cp
+		superFluid->GM()/rho/cp + fvc::div(kappa*superFluid->Grest(), "div(Grest)")/rho/cp
 	);
 	volScalarField& GMpGrest = tGMpGrest.ref();
 
@@ -37,7 +37,7 @@
         fvm::ddt(T)
       + fvm::div(phi, T)
       //- fvm::laplacian(alphaEff, T)
-      - 1./rho/cp*fvm::laplacian(k, T)
+      - 1./rho/cp*fvm::laplacian(kappa, T)
 //      - fvm::Sp(fvc::div(phi),T) // Taken from Nima Sam (post nr 107)
      ==
         radiation->ST(rhoCpRef, T) // nie policzone rhoCpRef
@@ -63,7 +63,7 @@
     rhok = 1.0 - beta*(T - TRef);
 	cp = superFluid->cpHe();
 	rho = superFluid->rhoHe();
-	k = superFluid->alpha();
+	kappa = superFluid->alpha();
 	Pr = superFluid->Pr(); // it is needed for alphat BC
 
     Info<< "min/max(T) = " << min(T).value() << ", "

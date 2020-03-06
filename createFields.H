@@ -295,7 +295,6 @@ volScalarField rhon
     ),
 	superFluid->rhon()
 );
-Info<< "rhon = " << rhon << endl;
 
 volScalarField rhos
 (
@@ -309,7 +308,6 @@ volScalarField rhos
     ),
 	superFluid->rhos()
 );
-Info<< "rhos = " << rhos << endl;
 
 volScalarField s
 (
@@ -339,11 +337,11 @@ volScalarField B
 //    dimensionedScalar("B", dimensionSet(0,2,-1,-1,0,0,0), scalar(0))
 );
 
-volScalarField k
+volScalarField kappa
 (
     IOobject
     (
-        "k",
+        "kappa",
         runTime.timeName(),
         mesh,
         IOobject::NO_READ,
@@ -352,6 +350,7 @@ volScalarField k
 	superFluid->alpha()
 //    dimensionedScalar("B", dimensionSet(0,2,-1,-1,0,0,0), scalar(0))
 );
+Info<< "kappa = " << kappa << endl;
 surfaceScalarField q
 (
     IOobject

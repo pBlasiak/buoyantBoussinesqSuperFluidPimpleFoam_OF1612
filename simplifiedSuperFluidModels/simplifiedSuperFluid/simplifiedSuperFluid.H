@@ -184,9 +184,9 @@ public:
 			return viscosityModelPtr_->beta();
 		}
 
-		const volScalarField& k() const
+		const volScalarField& kappaHe() const
 		{
-			return viscosityModelPtr_->k();
+			return viscosityModelPtr_->kappa();
 		}
 
 		const volScalarField& cpHe() const
