@@ -285,19 +285,19 @@ void Foam::simplifiedSuperFluids::Kitamura::correct()
 
 bool Foam::simplifiedSuperFluids::Kitamura::read()
 {
-//    if (simplifiedSuperFluid::read())
-//    {
-////        KitamuraCoeffs_ = subDict(type() + "Coeffs");
-////
-////        simplifiedSuperFluidCoeffs_.lookup("Cc") >> Cc_;
-////        simplifiedSuperFluidCoeffs_.lookup("Cv") >> Cv_;
-////
-        return true;
-//    }
-//    else
-//    {
-//        return false;
-//    }
+    if (simplifiedSuperFluid::read())
+    {
+//        KitamuraCoeffs_ = subDict(type() + "Coeffs");
+//
+//        simplifiedSuperFluidCoeffs_.lookup("Cc") >> Cc_;
+//        simplifiedSuperFluidCoeffs_.lookup("Cv") >> Cv_;
+//
+      return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 

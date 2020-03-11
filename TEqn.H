@@ -8,23 +8,7 @@
 	//    superFluid->alpha()
     //);
 	//alphaEff = talphaEff.ref();
-	alphaEff = kappa/rho/cp;
-
-	//k = superFluid->k();
-	//const dimensionedScalar aaa("aaa", dimensionSet(3,1,-9,-2,0,0,0), 53760214065249.20);
-	//const dimensionedScalar bbb("bbb", dimensionSet(3,1,-9,-1,0,0,0), 85119133182715.50);
-	//volScalarField K = aaa*T - bbb;
-	//Info<< "K = " << K << endl;
-	//volScalarField magG = max(mag(G), dimensionedScalar("minDt", dimTemperature/dimLength, SMALL));
-	//volScalarField onebyf = pow
-	//	   (
-	//	       max
-	//	       (
-	//	           K/magG/magG, 
-	//	    	   dimensionedScalar("small", dimensionSet(3,3,-9,-3,0,0,0), SMALL)
-	//	       ), 
-	//	       1./3
-	//	   );
+	alphaEff = kappa/rho/cp + alphat;
 
 	tmp<volScalarField> tGMpGrest
 	(

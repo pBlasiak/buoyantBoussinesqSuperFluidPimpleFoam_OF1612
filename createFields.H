@@ -169,20 +169,20 @@ volScalarField alphaEff
     //superFluid->alpha()/rho/cp
 );
 
-volScalarField nut
-(
-    IOobject
-    (
-        "nut",
-        runTime.timeName(),
-        mesh,
-        IOobject::MUST_READ,
-        IOobject::AUTO_WRITE
-    ),
-	mesh
-//	dimensionedScalar("nut", dimensionSet(0,2,-1,0,0,0,0), scalar(0))
-//    turbulence->nut()()
-);
+//volScalarField nut
+//(
+//    IOobject
+//    (
+//        "nut",
+//        runTime.timeName(),
+//        mesh,
+//        IOobject::MUST_READ,
+//        IOobject::AUTO_WRITE
+//    ),
+//	mesh
+////	dimensionedScalar("nut", dimensionSet(0,2,-1,0,0,0,0), scalar(0))
+////    turbulence->nut()()
+//);
 
 #include "readGravitationalAcceleration.H"
 #include "readhRef.H"
