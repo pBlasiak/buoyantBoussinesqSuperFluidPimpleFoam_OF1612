@@ -9,6 +9,7 @@
     //);
 	//alphaEff = talphaEff.ref();
 	alphaEff = kappa/rho/cp + alphat;
+	kappa += alphat*rho*cp; // added
 
 	tmp<volScalarField> tGMpGrest
 	(
