@@ -350,7 +350,6 @@ volScalarField kappa
 	superFluid->alpha()
 //    dimensionedScalar("B", dimensionSet(0,2,-1,-1,0,0,0), scalar(0))
 );
-Info<< "kappa = " << kappa << endl;
 surfaceScalarField q
 (
     IOobject
