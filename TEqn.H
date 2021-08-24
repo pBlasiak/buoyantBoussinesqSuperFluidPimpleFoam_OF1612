@@ -16,6 +16,8 @@
 		superFluid->GM()/rho/cp + fvc::div(kappa*superFluid->Grest(), "div(Grest)")/rho/cp
 	);
 	volScalarField& GMpGrest = tGMpGrest.ref();
+	
+	//Info<< "GMpGrest = " << GMpGrest << endl;
 
     fvScalarMatrix TEqn
     (
@@ -26,8 +28,8 @@
 //      - fvm::Sp(fvc::div(phi),T) // Taken from Nima Sam (post nr 107)
      ==
         radiation->ST(rhoCpRef, T) // nie policzone rhoCpRef
-	  + GMpGrest
-//      + fvm::SuSp(GMpGrest/T, T)
+//	  + GMpGrest
+      - fvm::SuSp(-GMpGrest/T, T)
       + fvOptions(T)
     );
 

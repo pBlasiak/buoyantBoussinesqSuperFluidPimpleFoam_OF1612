@@ -25,7 +25,7 @@
 //	phiHbyA += phig + phiM;
 
     // Update the pressure BCs to ensure flux consistency
-    constrainPressure(p, U, phiHbyA, rAUf, MRF);
+    //constrainPressure(p, U, phiHbyA, rAUf, MRF);
 
    // nie wiem czy to jest potrzebne
    // phiHbyA -= phiM;                                                     //3  (+)
