@@ -22,10 +22,10 @@ License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-    Foam::simplifiedSuperFluids::Pietrowicz
+    Foam::simplifiedSuperFluids::KitamuraGradP
 
 Description
-    Pietrowicz cavitation model slightly modified so that the condensation term
+    KitamuraGradP cavitation model slightly modified so that the condensation term
     is switched off when the pressure is less than the saturation vapour
     pressure.  This change allows the condensation term to be formulated as
     a coefficient multiplying (p - p_sat) so that it can be included as an
@@ -33,7 +33,7 @@ Description
 
     Reference:
     \verbatim
-        Pietrowicz, R.F., Boger, D.A., Stinebring, D.R., Chyczewski, Lindau. J.W.,
+        KitamuraGradP, R.F., Boger, D.A., Stinebring, D.R., Chyczewski, Lindau. J.W.,
         Gibeling, H.J., Venkateswaran, S., Govindan, T.R.,
         "A Preconditioned Implicit Method for Two-Phase Flows with Application
          to Cavitation Prediction,"
@@ -42,12 +42,12 @@ Description
     \endverbatim
 
 SourceFiles
-    Pietrowicz.C
+    KitamuraGradP.C
 
 \*--------------------------------------------------------------------*/
 
-#ifndef Pietrowicz_H
-#define Pietrowicz_H
+#ifndef KitamuraGradP_H
+#define KitamuraGradP_H
 
 #include "Kitamura.H"
 
@@ -59,10 +59,10 @@ namespace simplifiedSuperFluids
 {
 
 /*--------------------------------------------------------------------*\
-                              Class Pietrowicz
+                              Class KitamuraGradP
 \*--------------------------------------------------------------------*/
 
-class Pietrowicz
+class KitamuraGradP
 :
     public Kitamura
 {
@@ -70,7 +70,7 @@ class Pietrowicz
 
 		//- Reference to pressure field
 		
-        dictionary PietrowiczCoeffs_;
+        dictionary KitamuraGradPCoeffs_;
 
         const volScalarField& p_;
 
@@ -83,13 +83,13 @@ class Pietrowicz
 public:
 
     //- Runtime type information
-    TypeName("Pietrowicz");
+    TypeName("KitamuraGradP");
 
 
     // Constructors
 
         //- construct from components
-        Pietrowicz
+        KitamuraGradP
         (
             const volVectorField& U,
             const surfaceScalarField& phi
@@ -97,7 +97,7 @@ public:
 
 
     //- Destructor
-    virtual ~Pietrowicz()
+    virtual ~KitamuraGradP()
     {}
 
 

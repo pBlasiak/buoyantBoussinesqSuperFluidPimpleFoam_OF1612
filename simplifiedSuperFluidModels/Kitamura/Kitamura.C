@@ -208,7 +208,7 @@ Foam::tmp<Foam::volScalarField> Foam::simplifiedSuperFluids::Kitamura::alpha() c
 		   (
 		       max
 		       (
-		           viscosityModelPtr_->kappa()/magG_/magG_, 
+		           HeliumModelPtr_->kappa()/magG_/magG_, 
 		    	   dimensionedScalar("small", dimensionSet(3,3,-9,-3,0,0,0), SMALL)
 		       ), 
 		       1./3
@@ -219,7 +219,7 @@ Foam::tmp<Foam::volScalarField> Foam::simplifiedSuperFluids::Kitamura::alpha() c
 	//	   	   (
 	//	   	       max
 	//	   	       (
-	//	   	           viscosityModelPtr_->k()/magG_/magG_, 
+	//	   	           HeliumModelPtr_->k()/magG_/magG_, 
 	//	   	    	   dimensionedScalar("small", dimensionSet(3,3,-9,-3,0,0,0), SMALL)
 	//	   	       ), 
 	//	   	       1./3
@@ -275,7 +275,7 @@ void Foam::simplifiedSuperFluids::Kitamura::correct()
 		 (
 		     max
 		     (
-		         sHe()/viscosityModelPtr_->AGM()/rhon_/magG_/magG_, 
+		         sHe()/HeliumModelPtr_->AGM()/rhon_/magG_/magG_, 
 		         dimensionedScalar("small", dimensionSet(0,6,-3,-3,0,0,0), SMALL)
 		     ), 
 		     1./3

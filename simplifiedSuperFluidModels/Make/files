@@ -1,7 +1,7 @@
 simplifiedSuperFluid/simplifiedSuperFluid.C
 simplifiedSuperFluid/newSimplifiedSuperFluid.C
 Kitamura/Kitamura.C
-Pietrowicz/Pietrowicz.C
+KitamuraGradP/KitamuraGradP.C
 superFluidWall/superFluidWallFvPatchVectorField.C
 superFluidWallUn/superFluidWallUnFvPatchVectorField.C
 superFluidWallUs/superFluidWallUsFvPatchVectorField.C

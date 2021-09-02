@@ -36,7 +36,7 @@ SourceFiles
 #ifndef simplifiedSuperFluid_H
 #define simplifiedSuperFluid_H
 
-#include "singlePhaseTransportModel.H"
+#include "singlePhaseHeliumTransportModel.H"
 #include "typeInfo.H"
 #include "runTimeSelectionTables.H"
 #include "volFields.H"
@@ -55,7 +55,7 @@ namespace Foam
 
 class simplifiedSuperFluid
 :
-    public singlePhaseTransportModel
+    public singlePhaseHeliumTransportModel
 {
 
 protected:
@@ -181,42 +181,42 @@ public:
 
 		const volScalarField& betaHe() const
 		{
-			return viscosityModelPtr_->beta();
+			return HeliumModelPtr_->beta();
 		}
 
 		const volScalarField& kappaHe() const
 		{
-			return viscosityModelPtr_->kappa();
+			return HeliumModelPtr_->kappa();
 		}
 
 		const volScalarField& cpHe() const
 		{
-			return viscosityModelPtr_->cp();
+			return HeliumModelPtr_->cp();
 		}
 
 		const volScalarField& sHe() const
 		{
-			return viscosityModelPtr_->s();
+			return HeliumModelPtr_->s();
 		}
 
 		const volScalarField& etaHe() const
 		{
-			return viscosityModelPtr_->eta();
+			return HeliumModelPtr_->eta();
 		}
 
 		const volScalarField& rhoHe() const
 		{
-			return viscosityModelPtr_->rho();
+			return HeliumModelPtr_->rho();
 		}
 
 		const volScalarField& AHe() const
 		{
-			return viscosityModelPtr_->AGM();
+			return HeliumModelPtr_->AGM();
 		}
 
 		void calcPr()
 		{
-			Pr_ = viscosityModelPtr_->cp()*viscosityModelPtr_->eta()/alpha();
+			Pr_ = HeliumModelPtr_->cp()*HeliumModelPtr_->eta()/alpha();
 		}
 
 		const volScalarField& Pr() const

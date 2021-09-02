@@ -24,7 +24,7 @@ License
 \*---------------------------------------------------------------------------*/
 
 #include "fvc.H"
-#include "Pietrowicz.H"
+#include "KitamuraGradP.H"
 #include "addToRunTimeSelectionTable.H"
 
 // * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
@@ -33,21 +33,21 @@ namespace Foam
 {
 namespace simplifiedSuperFluids
 {
-    defineTypeNameAndDebug(Pietrowicz, 0);
-    addToRunTimeSelectionTable(simplifiedSuperFluid, Pietrowicz, components);
+    defineTypeNameAndDebug(KitamuraGradP, 0);
+    addToRunTimeSelectionTable(simplifiedSuperFluid, KitamuraGradP, components);
 }
 }
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
-Foam::simplifiedSuperFluids::Pietrowicz::Pietrowicz
+Foam::simplifiedSuperFluids::KitamuraGradP::KitamuraGradP
 (
     const volVectorField& U,
     const surfaceScalarField& phi
 )
 :
     Kitamura(U, phi),
-    PietrowiczCoeffs_(subDict(type() + "Coeffs")),
+    KitamuraGradPCoeffs_(subDict(type() + "Coeffs")),
 	p_(U.db().lookupObject<volScalarField>("p")),
 	Grest_
     (
@@ -62,7 +62,7 @@ Foam::simplifiedSuperFluids::Pietrowicz::Pietrowicz
 		U.mesh(),
 		dimensionedVector("Grest", dimensionSet(0,-1,0,1,0,0,0), vector(0,0,0))
     ),
-	GM_(PietrowiczCoeffs_.lookup("GM"))
+	GM_(KitamuraGradPCoeffs_.lookup("GM"))
 {
 //    correct();
 }
@@ -71,19 +71,19 @@ Foam::simplifiedSuperFluids::Pietrowicz::Pietrowicz
 // * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
 
 
-void Foam::simplifiedSuperFluids::Pietrowicz::calcG()
+void Foam::simplifiedSuperFluids::KitamuraGradP::calcG()
 {
 	Grest_ = -fvc::grad(p_*rhoHe())/sHe()/rhoHe();
 	G_ = fvc::grad(T_) + Grest_;
 }
 
-Foam::tmp<Foam::volScalarField> Foam::simplifiedSuperFluids::Pietrowicz::GM() const
+Foam::tmp<Foam::volScalarField> Foam::simplifiedSuperFluids::KitamuraGradP::GM() const
 {
 	if (GM_)
 	{
 		return 
 		(
-			   viscosityModelPtr_->AGM()*rhon_*rhos_*
+			   HeliumModelPtr_->AGM()*rhon_*rhos_*
 		       pow
 		       (
 		           max
@@ -96,7 +96,7 @@ Foam::tmp<Foam::volScalarField> Foam::simplifiedSuperFluids::Pietrowicz::GM() co
 		);
 		//tmp<volScalarField>
 		//(
-		//    viscosityModelPtr_->AGM()*rhon_*rhos_*
+		//    HeliumModelPtr_->AGM()*rhon_*rhos_*
 		//    pow
 		//    (
 		//        max
@@ -114,12 +114,12 @@ Foam::tmp<Foam::volScalarField> Foam::simplifiedSuperFluids::Pietrowicz::GM() co
 	}
 }
 
-Foam::tmp<Foam::volVectorField> Foam::simplifiedSuperFluids::Pietrowicz::Grest() const
+Foam::tmp<Foam::volVectorField> Foam::simplifiedSuperFluids::KitamuraGradP::Grest() const
 {
 	return Grest_;
 }
 
-//Foam::tmp<Foam::volScalarField> Foam::simplifiedSuperFluids::Pietrowicz::Grest() const
+//Foam::tmp<Foam::volScalarField> Foam::simplifiedSuperFluids::KitamuraGradP::Grest() const
 //{
 //	return tmp<volScalarField>
 //		   (
@@ -141,13 +141,13 @@ Foam::tmp<Foam::volVectorField> Foam::simplifiedSuperFluids::Pietrowicz::Grest()
 //		   );
 //}
 
-bool Foam::simplifiedSuperFluids::Pietrowicz::read()
+bool Foam::simplifiedSuperFluids::KitamuraGradP::read()
 {
     if (simplifiedSuperFluid::read())
     {
-        PietrowiczCoeffs_ = subDict(type() + "Coeffs");
+        KitamuraGradPCoeffs_ = subDict(type() + "Coeffs");
 
-        PietrowiczCoeffs_.lookup("GM") >> GM_;
+        KitamuraGradPCoeffs_.lookup("GM") >> GM_;
 
         return true;
     }

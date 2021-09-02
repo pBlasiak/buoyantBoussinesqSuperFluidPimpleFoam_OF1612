@@ -24,7 +24,7 @@ License
 \*---------------------------------------------------------------------------*/
 
 #include "simplifiedSuperFluid.H"
-#include "singlePhaseTransportModel.H"
+#include "singlePhaseHeliumTransportModel.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

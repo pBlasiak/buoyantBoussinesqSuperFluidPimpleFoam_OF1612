@@ -24,7 +24,7 @@ License
 \*---------------------------------------------------------------------------*/
 
 #include "simplifiedSuperFluid.H"
-#include "Helium.H"
+//#include "Helium.H"
 
 // * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
@@ -44,7 +44,7 @@ Foam::simplifiedSuperFluid::simplifiedSuperFluid
     const surfaceScalarField& phi
 )
 :
-    singlePhaseTransportModel(U, phi),
+    singlePhaseHeliumTransportModel(U, phi),
     simplifiedSuperFluidCoeffs_(subDict(type + "Coeffs")),
 	T_(U.db().lookupObject<volScalarField>("T")),
 	//rhoHe_(U.db().lookupObject<volScalarField>("rho")),
@@ -113,21 +113,21 @@ Foam::simplifiedSuperFluid::simplifiedSuperFluid
 
 void Foam::simplifiedSuperFluid::correct()
 {
-	viscosityModelPtr_->correct();
+	HeliumModelPtr_->correct();
 	rhons();
 	calcPr();
 }
 
 void Foam::simplifiedSuperFluid::rhons()
 {
-	const dimensionedScalar Tlambda = Foam::viscosityModels::Helium::Tlambda();
+	const dimensionedScalar Tlambda = Foam::HeliumModel::Tlambda();
 	rhon_ = rhoHe()*pow(max(T_/Tlambda, dimensionedScalar("small", dimless, SMALL)), scalar(5.6));
 	rhos_ = rhoHe() - rhon_;
 }
 
 bool Foam::simplifiedSuperFluid::read()
 {
-    if (singlePhaseTransportModel::read())
+    if (singlePhaseHeliumTransportModel::read())
     {
         simplifiedSuperFluidCoeffs_ = subDict(type() + "Coeffs");
 //        lookup("pSat") >> pSat_;
